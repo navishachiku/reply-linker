@@ -21,10 +21,16 @@ plain click reaches the mod. Ctrl-click still opens a link the terminal's way.
 
 ## Install
 
-From a clone of this repository, in a shell:
+At the prompt of a Claude Code session:
+
+```
+/plugin install reply-linker --marketplace navishachiku/reply-linker
+```
+
+Or from a shell:
 
 ```sh
-claude plugin install reply-linker --marketplace /path/to/reply-linker
+claude plugin install reply-linker --marketplace navishachiku/reply-linker
 ```
 
 ## Configuration
