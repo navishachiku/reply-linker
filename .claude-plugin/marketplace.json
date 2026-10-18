@@ -1,0 +1,15 @@
+{
+  "name": "reply-linker",
+  "owner": {
+    "name": "Navishachiku"
+  },
+  "metadata": {
+    "description": "reply-linker: open URLs and file paths in Claude replies with a click"
+  },
+  "plugins": [
+    {
+      "name": "reply-linker",
+      "source": "./"
+    }
+  ]
+}

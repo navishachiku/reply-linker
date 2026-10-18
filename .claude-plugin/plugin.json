@@ -1,0 +1,30 @@
+{
+  "name": "reply-linker",
+  "version": "0.1.0",
+  "description": "Click URLs and file paths in Claude's replies to open them in the browser and editor you choose",
+  "author": {
+    "name": "Navishachiku"
+  },
+  "license": "MIT",
+  "userConfig": {
+    "browser": {
+      "type": "string",
+      "title": "Browser",
+      "description": "Where http(s) links open: the system default or a named browser",
+      "default": "system",
+      "options": [
+        "system",
+        "chrome",
+        "safari",
+        "edge",
+        "firefox"
+      ]
+    },
+    "editor": {
+      "type": "string",
+      "title": "Editor command",
+      "description": "Command that opens file links; code, cursor and windsurf also jump to the line",
+      "default": "code"
+    }
+  }
+}
