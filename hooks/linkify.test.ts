@@ -32,6 +32,29 @@ describe('linkify', () => {
   })
 })
 
+describe('file:// paths', () => {
+  const R = (p: string) => (p.endsWith('README.md') ? 'file:///x' : undefined)
+
+  test('links a file:/// path including the scheme, and finds its path', () => {
+    expect(candidates('open file:///Users/a/README.md now')).toEqual([{ kind: 'path', path: '/Users/a/README.md', line: undefined }])
+    expect(linkify('open file:///Users/a/README.md now', R)).toBe('open [file:///Users/a/README.md](file:///x) now')
+    expect(linkify('open `file:///Users/a/README.md`', R)).toBe('open [`file:///Users/a/README.md`](file:///x)')
+  })
+
+  test('plain paths, URLs and a colon-prefixed look-alike are unchanged', () => {
+    expect(linkify('see https://a.com/x.', R)).toBe('see [https://a.com/x](https://a.com/x).')
+    expect(linkify('see /Users/a/README.md', R)).toBe('see [/Users/a/README.md](file:///x)')
+    expect(candidates('see ffile:///Users/a/README.md')).toEqual([])
+  })
+
+  test('drive-letter form links; wsl.localhost form is found but resolves as a relative path (no link on macOS)', () => {
+    expect(candidates('file:///D:/work/a.md')).toEqual([{ kind: 'path', path: 'D:/work/a.md', line: undefined }])
+    expect(candidates('file://wsl.localhost/Ubuntu/home/a.md')).toEqual([
+      { kind: 'path', path: 'wsl.localhost/Ubuntu/home/a.md', line: undefined },
+    ])
+  })
+})
+
 describe('paths', () => {
   test('resolves relative, home and parent parts', () => {
     expect(absolute('../b/c.md', '/r/a', '/h')).toBe('/r/b/c.md')

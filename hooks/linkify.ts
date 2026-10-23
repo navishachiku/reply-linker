@@ -14,8 +14,10 @@ const DIRS = String.raw`(?:[\w.@+-]+[\\/])*`
 // POSIX (`/a/b.md`, `~/b.md`, `./b.md`, `src/b.md`) or Windows (`C:\a\b.md`).
 const PATH_BODY = String.raw`(?:[A-Za-z]:[\\/]${DIRS}${NAME}|(?:~|\.{1,2})?\/?${DIRS}${NAME})`
 const LINE = String.raw`(?::(\d+)(?:[-:]\d+)?)?`
-const PATH_RE = new RegExp(String.raw`(?<![\w/\\.:~-])(${PATH_BODY})${LINE}(?![\w/\\])`, 'g')
-const WHOLE_PATH_RE = new RegExp(String.raw`^(${PATH_BODY})${LINE}$`)
+// `file://` before a path is part of the link text (`file:///D:/a.md` keeps the third slash with the drive).
+const SCHEME = String.raw`(?:file:\/\/(?:\/(?=[A-Za-z]:[\\/]))?)?`
+const PATH_RE = new RegExp(String.raw`(?<![\w/\\.:~-])${SCHEME}(${PATH_BODY})${LINE}(?![\w/\\])`, 'g')
+const WHOLE_PATH_RE = new RegExp(String.raw`^${SCHEME}(${PATH_BODY})${LINE}$`)
 // Sentence punctuation, ASCII and full-width (\u3002 \uFF0C \uFF1B \uFF1A \uFF01 \uFF1F).
 const TRAILING = /[.,;:!?\u3002\uFF0C\uFF1B\uFF1A\uFF01\uFF1F]+$/
 
