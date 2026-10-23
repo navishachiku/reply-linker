@@ -61,6 +61,13 @@ if the environment variable `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` is set,
 Claude does not receive the mouse and a single click does nothing; unset it
 to restore clicking. WSL is not affected.
 
+On macOS inside Herdr, Claude draws links as plain text, so they look like
+the words around them. Add `"FORCE_HYPERLINK": "1"` to `env` in Claude's
+`settings.json` and links are drawn in the link color.
+
+<!-- Remove the paragraph above once links have their style inside Herdr on
+macOS without it, after a Claude Code or Herdr update. -->
+
 ## Development
 
 ```sh
