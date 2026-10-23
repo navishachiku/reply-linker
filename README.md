@@ -56,8 +56,10 @@ and a toast says so when nothing could open it.
 | Windows | `Start-Process` | editor via `cmd`, then Explorer |
 
 Tested on macOS. On a Windows machine running Claude inside Herdr, both
-native Windows and WSL draw the links and react to hover, but a plain click
-does not reach the mod yet.
+native Windows and WSL draw the links and react to hover. On native Windows,
+if the environment variable `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` is set,
+Claude does not receive the mouse and a single click does nothing; unset it
+to restore clicking. WSL is not affected.
 
 ## Development
 
